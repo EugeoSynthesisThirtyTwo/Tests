@@ -1,16 +1,3 @@
-/*
-	Le compilateur rajoute une entete ici pour que le fichier
-	puisse etre lu par OpenGL
-*/
-
-/*
-	Defini la taille de la fenetre.
-
-	Cette ligne est remplacee a la compilation par:
-	uniform vec4 screenRect;
-
-	Cette ligne modifie aussi WIDTH et HEIGHT dans le fichier main.cpp.
-*/
 size(1600, 900);
 
 /*
