@@ -1,11 +1,28 @@
-#version 460 core
+/*
+	Le compilateur rajoute une entete ici pour que le fichier
+	puisse etre lu par OpenGL
+*/
 
-layout(location = 0) out vec4 color;
+/*
+	Defini la taille de la fenetre.
 
-uniform unsigned int frame;
-uniform vec4 screenRect;
+	Cette ligne est remplacee a la compilation par:
+	uniform vec4 screenRect;
 
-// interpolate a in [b, c] to [d, e]
+	Cette ligne modifie aussi WIDTH et HEIGHT dans le fichier main.cpp.
+*/
+size(1600, 900);
+
+/*
+	Le reste du code est laisse tel quel,
+	sauf la fonction main dont le type de retour est change en void,
+	et dont la ligne:
+		return colorFromIterations(iterations, maxIterations);
+	est remplacee par:
+		color = colorFromIterations(iterations, maxIterations);
+*/
+
+// interpolation de a depuis [b, c] vers [d, e]
 double map(double a, double b, double c, double d, double e)
 {
 	return (a - b) / (c - b) * (e - d) + d;
@@ -21,6 +38,7 @@ dvec4 getMandelBounds()
 	double ymin0 = (xmin0 - xmax0) / 2 * screenRect.w / screenRect.z;
 	double ymax0 = -ymin0;
 
+	// la variable frame est fournie par le compilateur
 	double zoom = pow(zoomRate, float(frame) / 2);
 	zoom = zoom * zoom;
 
@@ -34,6 +52,7 @@ dvec4 getMandelBounds()
 
 dvec2 getCoord(dvec4 mandelBounds)
 {
+	// gl_FragCoord est la position du pixel
 	return dvec2(
 		map(gl_FragCoord.x, screenRect.x, screenRect.x + screenRect.z, mandelBounds.x, mandelBounds.z),
 		map(gl_FragCoord.y, screenRect.y, screenRect.y + screenRect.w, mandelBounds.y, mandelBounds.w)
@@ -72,12 +91,14 @@ vec4 colorFromIterations(unsigned int iterations, unsigned int maxIterations)
 	);
 }
 
-void main()
+// renvoie la couleur du pixel en question
+vec4 main()
 {
 	unsigned int maxIterations = 1000;
 
 	dvec4 mandelBounds = getMandelBounds();
 	dvec2 z0 = getCoord(mandelBounds);
 	unsigned int iterations = mandelbrot(z0, maxIterations);
-	color = colorFromIterations(iterations, maxIterations);
+
+	return colorFromIterations(iterations, maxIterations);
 }
