@@ -1,5 +1,5 @@
 Mon projet serais d'écrire un code simple pour générer une image, (ou une vidéo, car le code est appelé à chaque frame),<br>
-mais qui utiliserais automatiquement la carte graphique grace a OpenGL.<br>
+mais qui utiliserais automatiquement la carte graphique grace a OpenGL, et qui serais donc très rapide.<br>
 <br>
 Exemple : le compilateur se nourit du fichier source.monlangage et produit le dossier bin en sortie.<br>
 <br>
