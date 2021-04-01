@@ -1,14 +1,5 @@
 size(1600, 900);
 
-/*
-	Le reste du code est laisse tel quel,
-	sauf la fonction main dont le type de retour est change en void,
-	et dont la ligne:
-		return colorFromIterations(iterations, maxIterations);
-	est remplacee par:
-		color = colorFromIterations(iterations, maxIterations);
-*/
-
 // interpolation de a depuis [b, c] vers [d, e]
 double map(double a, double b, double c, double d, double e)
 {
