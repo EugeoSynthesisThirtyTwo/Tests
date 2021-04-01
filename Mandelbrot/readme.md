@@ -43,6 +43,7 @@ size(1600, 900);
 ```
 <br>
 Pour faire ça, je vais avoir besoin que mon compilateur remplace cette ligne par:<br>
+
 ```c++
 #version 460 core
 
