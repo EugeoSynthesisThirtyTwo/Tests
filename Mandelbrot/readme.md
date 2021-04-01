@@ -9,7 +9,7 @@ ainsi que les shaders eux aussi produits par le compilateur, qui sont nécessair
 Vous constatez qu'avec un code rudimentaire, on peut obtenir un programme qui génère l'ensemble de mandelbrot<br>
 avec une rapidité stupéfiante car ça se passe sur la carte graphique.<br>
 Bon ok ça lag un peu, mais si vous remplacez les double par des float, et les dvec4 / dvec2 par des vec4 / vec2,<br>
-ou que vous réduisez le nombre d'itérations par pixel, qui est actuellement de 1000, ça tournera en 60 fps.<br>
+ou que vous réduisez le nombre d'itérations par pixel, qui est actuellement de 1000, alors ça tournera en 60 fps.<br>
 Et ceci, quel que soit la taille de l'écran ! Du moment que vous avez moins de pixels sur votre écran, que vous n'avez<br> d'unité dans votre carte graphique, le programme tournera à la même vitesse.
 <br>
 <br>
