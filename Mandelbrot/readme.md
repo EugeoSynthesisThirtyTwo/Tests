@@ -1,5 +1,5 @@
-Mon projet serais d'écrire un code simple pour générer une image, (ou une vidéo, car le code est appelé à chaque frame),<br>
-mais qui utiliserais automatiquement la carte graphique grace a OpenGL, et qui serais donc très rapide.<br>
+Mon projet serait d'écrire un code simple pour générer une image, (ou une vidéo, car le code est appelé à chaque frame),<br>
+mais qui utiliserais automatiquement la carte graphique grâce à OpenGL, et qui serais donc très rapide.<br>
 <br>
 Exemple : le compilateur se nourrit du fichier source.monlangage et produit le dossier bin en sortie.<br>
 <br>
@@ -14,7 +14,7 @@ Et ceci, quel que soit la taille de l'écran ! Du moment que vous avez moins de 
 <br>
 <br>
 La syntaxe serais la même que celle des shaders d'OpenGL, qui est assez rudimentaire,<br>
-donc je n'aurais pas besoin de lire des lexemes à ce niveau là, puisque c'est OpenGL qui va se charger<br>
+donc je n'aurais pas besoin de lire des lexèmes à ce niveau là, puisque c'est OpenGL qui va se charger<br>
 de compiler le plus gros du programme.<br>
 <br>
 En revanche, les shaders ne fonctionnent pas tous seuls, il faut un code (C++ par exemple) qui les lis et les envoie,<br>
@@ -24,14 +24,14 @@ Le fichier C++ en question est : fichier_cpp_utilise_par_le_compilateur.cpp<br>
 <br>
 Si j'ai été clair jusqu'ici, vous avez du comprendre que mon compilateur ne fait quasiment rien du tout:<br>
 Il prend le fichier fichier_cpp_utilise_par_le_compilateur.cpp et le fichier source.monlangage, et les envoies a gcc.<br>
-C'est ensuite, lors de l'éxécution du programme, que OpenGL compile les shaders, donc le fichier source.monlangage.<br>
+C'est ensuite, lors de l'exécution du programme, que OpenGL compile les shaders, donc le fichier source.monlangage.<br>
 <br>
 Effectivement j'aurais pu m'arrêter là, j'aurais atteint mon but qui est de simplifier la confection d'un code qui<br>
-s'éxécute sur la carte graphique.<br>
+s'exécute sur la carte graphique.<br>
 En revanche je n'aurais pas atteint mon but qui est de faire un compilateur dans le cadre de ce cours.<br>
 <br>
 J'aurais pu changer la syntaxe des shaders d'OpenGL pour faire mon propre langage mais je ne l'ai pas fait<br>
-car je souhaite garder un maximum de fonctionnalitées fournies par OpenGL, et la syntaxe est vraiment simple.<br>
+car je souhaite garder un maximum de fonctionnalités fournies par OpenGL, et la syntaxe est vraiment simple.<br>
 Mais un simple shader ne permet pas de spécifier certains paramètres, par exemple la taille de la fenêtre.<br>
 C'est là que j'ajoute ma touche personnelle.<br>
 Si je ne modifie pas la syntaxe du langage des shaders d'OpenGL, je peut en revanche y ajouter des fonctionnalités.<br>
@@ -41,7 +41,7 @@ Par exemple, la ligne suivante au début du fichier permet de définir la taille
 size(1600, 900);
 ```
 <br>
-Pour réaliser cette tache, je vais avoir besoin que mon compilateur remplace cette ligne par:
+Pour réaliser cette tâche, je vais avoir besoin que mon compilateur remplace cette ligne par:
 
 ```c++
 #version 460 core
