@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 
 #include "grid.h"
 #include "serializer.h"
@@ -134,18 +135,31 @@ Grid Grid::load(std::string file)
 {
 	namespace s = serializer;
 
+	std::cout << "open " << file << "..." << std::endl;
 	std::ifstream input(file, std::ios::binary);
+
+	if (input.fail())
+		throw "Impossible d'ouvrir " + file;
+
+	std::cout << "read bytes..." << std::endl;
+
 	BetterVector<char> bytes = BetterVector<char>(std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>());
 	input.close();
 
+	std::cout << "check size..." << std::endl;
+
 	if (bytes.size() < sizeof(size_t))
 		throw file + " corrupted.";
+
+	std::cout << "unserialize expected size..." << std::endl;
 
 	int cursor = 0;
 	size_t expectedSize = s::unserialize<size_t>(bytes.data(), cursor);
 
 	if (bytes.size() != expectedSize)
 		throw file + " corrupted.";
+
+	std::cout << "create grid..." << std::endl;
 
 	return Grid(bytes.data(), cursor);
 }

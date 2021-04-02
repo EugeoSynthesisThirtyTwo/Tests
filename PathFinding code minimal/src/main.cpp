@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include "grid.h"
-#include "AStar.h"
+#include "astar.h"
 
 void savePath(std::string filePath, const std::vector<std::pair<int, int>>& path)
 {
