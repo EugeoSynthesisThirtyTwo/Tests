@@ -40,13 +40,7 @@ public:
 
 	void save(std::string file) const;
 
-	constexpr int getWidth() const
-	{
-		return width;
-	}
+	int getWidth() const;
 
-	constexpr int getHeight() const
-	{
-		return height;
-	}
+	int getHeight() const;
 };

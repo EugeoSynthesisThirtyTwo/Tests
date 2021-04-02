@@ -54,7 +54,7 @@ void savePath(std::string filePath, const std::vector<std::pair<int, int>>& path
 	}
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
 	if (argc != 7)
 	{
@@ -62,14 +62,30 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 
-	Grid grid = Grid::load(argv[1]);
-	AStar astar(grid);
-	std::vector<std::pair<int, int>> path = astar.findPath(
-		std::stoi(argv[2]), std::stoi(argv[3]),
-		std::stoi(argv[4]), std::stoi(argv[5])
-	);
+	std::string s1 = std::string(argv[1]);
+	std::string s2 = std::string(argv[2]);
+	std::string s3 = std::string(argv[3]);
+	std::string s4 = std::string(argv[4]);
+	std::string s5 = std::string(argv[5]);
+	std::string s6 = std::string(argv[6]);
 
-	savePath(argv[6], path);
+	std::cout << "grid load..." << std::endl;
+	Grid grid = Grid::load(s1);
+
+	std::cout << "generate astar..." << std::endl;
+	AStar astar(grid);
+
+	std::cout << "convert argv to int..." << std::endl;
+	int x_start = std::stoi(s2);
+	int y_start = std::stoi(s3);
+	int x_end = std::stoi(s4);
+	int y_end = std::stoi(s5);
+
+	std::cout << "calculate path..." << std::endl;
+	std::vector<std::pair<int, int>> path = astar.findPath(x_start, y_start, x_end, y_end);
+
+	std::cout << "save path..." << std::endl;
+	savePath(s6, path);
 
 	std::cout << "success" << std::endl;
 

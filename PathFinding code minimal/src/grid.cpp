@@ -168,3 +168,13 @@ void Grid::save(std::string file) const
 	output.write(buffer.data(), buffer.size());
 	output.close();
 }
+
+int Grid::getWidth() const
+{
+	return width;
+}
+
+int Grid::getHeight() const
+{
+	return height;
+}
