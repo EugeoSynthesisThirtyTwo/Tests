@@ -17,25 +17,13 @@
 
 namespace serializer
 {
-	bool isLittleEndian();
-
-	char swap(char byte);
-
 	template<typename T>
 	void serialize(BetterVector<char>& buffer, T value)
 	{
 		char* pointer = (char*)&value;
 
-		if (isLittleEndian())
-		{
-			for (size_t i = 0; i < sizeof(T); i++)
-				buffer.push_back(pointer[i]);
-		}
-		else
-		{
-			for (size_t i = sizeof(T) - 1; i >= 0; i--)
-				buffer.push_back(swap(pointer[i]));
-		}
+		for (size_t i = 0; i < sizeof(T); i++)
+			buffer.push_back(pointer[i]);
 	}
 
 	template<typename T>
