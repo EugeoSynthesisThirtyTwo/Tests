@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 
 #include "grid.h"
 #include "serializer.h"
@@ -134,32 +135,31 @@ void Grid::clear(bool value)
 Grid Grid::load(std::string file)
 {
 	namespace s = serializer;
-
-	std::cout << "open " << file << "..." << std::endl;
 	std::ifstream input(file, std::ios::binary);
 
 	if (input.fail())
-		throw "Impossible d'ouvrir " + file;
-
-	std::cout << "read bytes..." << std::endl;
+	{
+		std::cout << "Impossible d'ouvrir " << file << std::endl;;
+		exit(EXIT_FAILURE);
+	}
 
 	BetterVector<char> bytes = BetterVector<char>(std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>());
 	input.close();
 
-	std::cout << "check size..." << std::endl;
-
-	if (bytes.size() < sizeof(size_t))
-		throw file + " corrupted.";
-
-	std::cout << "unserialize expected size..." << std::endl;
+	if (bytes.size() < sizeof(uint32_t))
+	{
+		std::cout << file << " corrupted." << std::endl;;
+		exit(EXIT_FAILURE);
+	}
 
 	int cursor = 0;
-	size_t expectedSize = s::unserialize<size_t>(bytes.data(), cursor);
+	uint32_t expectedSize = s::unserialize<uint32_t>(bytes.data(), cursor);
 
 	if (bytes.size() != expectedSize)
-		throw file + " corrupted.";
-
-	std::cout << "create grid..." << std::endl;
+	{
+		std::cout << file << " corrupted." << std::endl;;
+		exit(EXIT_FAILURE);
+	}
 
 	return Grid(bytes.data(), cursor);
 }
@@ -169,13 +169,13 @@ void Grid::save(std::string file) const
 	namespace s = serializer;
 
 	BetterVector<char> buffer;
-	s::serialize<size_t>(buffer, 0);
+	s::serialize<uint32_t>(buffer, 0);
 	serialize(buffer);
 
 	BetterVector<char> header;
-	s::serialize<size_t>(header, buffer.size());
+	s::serialize<uint32_t>(header, buffer.size());
 
-	for (int i = 0; i < sizeof(size_t); i++)
+	for (int i = 0; i < sizeof(uint32_t); i++)
 		buffer[i] = header[i];
 
 	std::ofstream output(file, std::ios::binary);
